@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/ble.js"></script>
+        <script type="text/javascript" src="js/app.js"></script>
+        <script type="text/javascript" src="js/users.js"></script>
+        <script src="js/cryptojs/components/core-min.js"></script>
+        <script src="js/cryptojs/components/enc-base64-min.js"></script>
+        <script src="js/cryptojs/rollups/aes.js" type="text/javascript"></script>
+        <script type="text/javascript" charset="utf-8">
+            // Wait for Cordova to load
+            document.addEventListener("deviceready", onDeviceReady, false);
+
+            // Cordova is ready
+            function onDeviceReady() {
+                var userList = window.localStorage.getItem("userList");
+                if(!userList){
+                    window.localStorage.setItem("userList", "demo"); //borrar al compilar, only for testing
+                    window.localStorage.setItem("keyList","sbcuLagiUMHVoO7OP8jiNUyHbQYZIu98k0/GNahOW6w=");
+                    window.localStorage.setItem("user","demo");
+                    window.localStorage.setItem("key","sbcuLagiUMHVoO7OP8jiNUyHbQYZIu98k0/GNahOW6w=");
+                }
+                var element = document.getElementById('deviceProperties');
+                var plataforma = document.getElementById('platformImage');
+                var rutaImagen;
+                if(device.platform=="Android"){
+                    rutaImagen="res/android.png";
+                }else{
+                    rutaImagen="res/ios.png";
+                }
+                plataforma.src=rutaImagen;
+                element.innerHTML = 
+                                    'Device Name: '     + device.name     + '<br />' + 
+                                    'Device Cordova: '  + device.cordova + '<br />' + 
+                                    'Device UUID: '     + device.uuid     + '<br />' + 
+                                    'Device Model: '    + device.model     + '<br />' + 
+                                    'Device Version: '  + device.version  + '<br />';
+            }
+        </script>
+
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <link rel="stylesheet" type="text/css" href="css/fontawesome/css/font-awesome.min.css" />
+        <title>BLE Authentication</title>
+    </head>
+    <body>
+        <panel id="main" status="show">
+            <div class="app">
+                <img src="res/bluetooth.png">
+                <h1 class="titulo">Bluetooth LE Authentication</h1>
+            </div>
+            <div onClick="manageProfiles();"><div class="arr"></div><div class="iconito"><i class="fa fa-user fa-2x fa-inverse"></i></div></div>
+            <div class="info" style="visibility: hidden">
+                <input type="text" readonly id="rssiInfo" size="10">
+            </div>
+            <div class="registro">
+                <textarea readonly id="registro">Para comenzar, pulsa el botón.</textarea>
+            </div>
+            <div class="boton">
+              <img src="res/on.png" onClick="inicializar();" id="boton">
+            </div>
+            <div class="izq" onClick="clearReg();"><div class="icono"><i class="fa fa-times-circle fa-5x fa-inverse"></i></div></div>
+            <div class="der" onClick="showInfo();"><div class="icono"><i class="fa fa-info fa-5x fa-inverse"></i></div></div>
+        </panel>
+        <panel id="info" status="hide">
+            <header>
+                <i onClick="back();" class="fa fa-chevron-left"></i>
+                <div class="titulo">Información del dispositivo</div>
+            </header>
+            <content>
+                <div style="text-align: center; margin: 40px;"><img id="platformImage" style="width: 30%;"></div>
+                <p id="deviceProperties">Leyendo propiedades del dispositivo...</p>
+            </content>
+        </panel>
+        <panel id="users" status="hide">
+            <header>
+                <i onClick="back();" class="fa fa-chevron-left"></i>
+                <div class="titulo">Perfiles de usuario</div>
+            </header>
+            <content>
+                <div class="usuarios">
+                    Selección de usuario:<br><br>
+                    <div style="text-align: center; width: 100%;">
+                        <select id="selector" class="btn">
+                            <!-- <option value="0">Jercobyte</option> -->
+                        </select>
+                        <div id="setUser" onClick="setUser();"><i class="fa fa-key fa-2x"></i></div>
+                        <div id="deleteUser" onClick="deleteUser();"><img src="res/bin.png" width="80%"></div>
+                    </div><br><br>
+                    <div style="text-align: center;"><div class="btnverde" onClick="anadirUsuario();">Añadir usuario</div></div>
+
+                    <div id="usuariosContent">
+                    </div>
+            </div>
+            </content>
+        </panel>
+        <!--<script type="text/javascript" src="js/index.js"></script>-->
+        <!--<script type="text/javascript">
+            app.initialize();
+        </script> -->
+    </body>
+</html>

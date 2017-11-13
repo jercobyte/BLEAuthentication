@@ -1,0 +1,11 @@
+.texto {
+	display:block;
+	float:left;
+	width:100%;
+	background-color: white;
+	height:auto;
+	padding:10px;
+	padding-bottom: 20px;
+	margin-top: 15px;
+	border-radius: 5px;
+}

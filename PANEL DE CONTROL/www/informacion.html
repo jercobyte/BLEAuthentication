@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="style.css" />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<script type="text/javascript" src="js/app.js"></script>
+<title>Bluetooth LE Authentication Panel</title>
+</head>
+
+<body>
+<div id="container">
+		<div id="header">
+        	<img src="images/on.png"></img><h1>BLE Authentication<span class="off">Control Panel</span></h1>
+        </div>   
+        
+        <div id="menu">
+        	<ul>
+            	<li class="menuitem"><a href="index.html">Home</a></li>
+                <li class="menuitem"><a href="informacion.html">Información</a></li>
+                <li class="menuitem"><a href="usuarios.html">Gestionar usuarios</a></li>
+            </ul>
+        </div>
+        <div id="leftmenu">
+
+        <div id="leftmenu_top"></div>
+
+			<div id="leftmenu_main">    
+                <h3>Información sobre...</h3>
+                <ul>
+                    <li><a href="#" onClick="contenido('funcionamiento')">Funcionamiento</a></li>
+                    <li><a href="#" onClick="contenido('management')">Gestión de usuarios</a></li>
+                    <li><a href="#" onClick="contenido('detalles')">Detalles técnicos</a></li>
+                    <li><a href="#" onclick="contenido('creditos')">Créditos</a></li>
+                </ul>
+            </div>    
+            <div id="leftmenu_bottom"></div>
+        </div>
+        
+        
+        
+        
+		<div id="content">
+            <div id="content_top"></div>
+            <div id="content_main">
+                <h2>INFORMACIÓN</h2><br>
+                <p>
+                Hoy en día, una de las principales metas de la seguridad informática es la verificación de la identidad de las personas que hacen uso de aplicaciones o que acceden de forma física a su lugar de trabajo habitual, este proceso se conoce como autenticación de usuarios. Frente a las tecnologías tradicionales como las contraseñas (algo que el usuario "conoce") o el uso de tarjetas inteligentes (algo que "poseen"), aparece la necesidad de diseñar una solución que permita no sólo comprobar la identidad del usuario en un momento dado (la mayoría de las veces al acceder a la aplicación, lo que abre la puerta a posibles sustracciones de identidad), sino durante todo el periodo de uso del servicio. Estas técnicas deben ser poco intrusivas en la rutina de la persona, y a la vez conseguir una identificación unívoca, reduciendo la probabilidad de suplantación de identidad. Otro aspecto importante a considerar es el respeto a la privacidad de los usuarios, debiéndose evitar que elementos externos al sistema puedan conocer los patrones de uso de sus usuarios o hacer un seguimiento efectivo de estas.
+                </p>
+                <br><br>
+                <p>
+                Este proyecto se circunscribe en el ámbito de la seguridad informática y pretende estudiar una posible implementación de un protocolo de autenticación de dichas características. Concretamente, su foco principal es la utilización de dispositivos inalámbricos (p. e. móvil) para estudiar el potencial impacto sobre la privacidad de las personas, su usabilidad y la aplicación en escenarios concretos.
+                <p><br><br>
+                <p>
+                Además, describiremos la implementación de un sistema con tintes similares haciendo uso de la tecnología Bluetooth Low Energy o Bluetooth 4.0 (comercialmente Bluetooth Smart), de forma que el usuario puede usar el sistema siempre que se encuentre a una distancia próxima al equipo.
+                </p>
+            </div>
+            <div id="content_bottom"></div>
+        </div>
+
+        <div id="funcionamiento" style="display: none;">
+            <h2>FUNCIONAMIENTO</h2><br>
+            <p>La disposición lógica que adopta nuestro sistema de autenticación entrada/continua usando Bluetooth Low Energy es algo parecido a lo que se muestra en la siguiente figura:</p><br><br>
+
+            <div style="margin: auto; text-align: center;"><img src="images/funcion.png"></div>
+
+            <p>Como se puede observar, el funcionamiento del sistema es bien sencillo: en primer lugar es preciso disponer de un sistema de autenticación de entrada fiable; por el momento supongamos que se usará una contraseña en la aplicación móvil o simplemente se recurirá a un tradicional patrón de desbloqueo. De cualquier modo, será necesario que la persona lleve el teléfono móvil consigo, por lo que el ordenador no debe permitir siquiera el acceso sin haber presentado antes unas credenciales de seguridad desde el dispositivo móvil (que serán fijadas en una fase previa de registro donde se empareja el smartphone con un usuario del sistema).</p><br><br>
+
+            <p>Tras ello, el equipo ha de corroborar la identidad del usuario mediante un servidor con el que posee una conexión fiable. Este nuevo subsistema será el que tomará el papel de autoridad de certificación, que se encarga de gestionar todas las autorizaciones de usuario (supongamos por ejemplo una arquitectura basada en certificados digitales), de forma que el proceso de identificación se efectúa de forma cifrada. Desde este servidor también se puede incluir ciertas funcionalidades de cara a monitorizar las autorizaciones en el sistema. Un posible ejemplo sería el almacenamiento de datos como la hora de conexión. </p><br><br>
+
+            <p>Tras comprobar que la información cifrada se corresponde con lo almacenado en la base de datos de usuarios, el equipo se desbloquea durante el tiempo en que el teléfono móvil está situado dentro de un rango determinado y que es fijado cautelosamente de manera que permite cierta movilidad de la persona alrededor del ordenador y al mismo tiempo asegura un bloqueo cuando se aleja de su campo de visión.</p>
+        </div>
+        <div id="management" style="display: none;">
+            <h2>GESTIÓN DE USUARIOS</h2><br>
+            <p>
+                Desde este panel de control es posible:<br><br>
+                <ul>
+                    <li>
+                        <b>Añadir usuario:</b> solo está disponible si el usuario de Ubuntu no dispone aún de un smartphone vinculado con el servidor para acometer la autenticación. En ese caso, se muestran las correspondientes instrucciones por pantalla.
+                    </li>
+                    <li>
+                        <b>Consultar usuarios:</b> muestra la lista de usuarios de la aplicación de autenticación y, en caso de estar conectado al sistema con uno de ellos, da la opción de eliminarlo.
+                    </li>
+                </ul>
+            </p>
+        </div>
+        <div id="detalles" style="display: none;">
+            <h2>DETALLES TÉCNICOS</h2><br>
+            <p>
+                Nuestro sistema de autenticación de entrada y continua usando Bluetooth Low Energy basándonos en la distancia entre dos dispositivos posee las siguientes características:<br><br>
+
+                <ul>
+
+                    <li>
+                        Tenemos un cliente en un dispositivo móvil. Por simplicidad y dados los objetivos del proyecto, recurrimos a la plataforma Android, aunque es una aplicación fácilmente portable a otras plataformas debido al framework de desarrollo que utilizamos (Apache Cordova).
+                    </li><br>
+                    <li>
+                        Hay un servidor que es un equipo de sobremesa o un ordenador portátil. La aplicación que en él implantamos tiene concentrada toda la funcionalidad para establecer la conexión BLE, por un lado, y todo lo relacionado con la gestión de usuarios, por otro. Por facilidad ante las operaciones a implementar (como el bloqueo o desbloqueo de la sesión en el PC) hacemos uso de una distribución Ubuntu 12.04.
+                    </li><br>
+                    <li>
+                        El servidor hace las veces de un dispositivo Bluetooth SMART: deberemos emular la funcionalidad de un gadget de estas características, al igual que se hace con los wearables. Por tanto, especificamos el conjunto de servicios y características BLE a proporcionar para su funcionamiento. Para ello utilizamos un módulo de Node.js. 
+                    </li><br>
+                    <li>
+                        Desde el servidor debemos realizar un buen diseño de la base de datos de los usuarios con MongoDB, de forma que se permita que varios usuarios con varios móviles puedan loguearse en todos los usuarios del sistema. De la misma forma, en el móvil también podremos elegir con qué usuario accedemos al sistema, por lo que todo ello hay que presentarlo desde un panel de control desde el cual mostrar un asistente para la gestión de usuarios.
+                    </li>
+            </p>
+        </div>
+        <div id="creditos" style="display: none;">
+            <h2>CRÉDITOS</h2><br>
+            <p>
+                Realizado por:<br>
+                <b>Juan Enrique Rubio Cortés</b><br><br>
+                Tutorizado por:<br>
+                <b>Isaac Agudo Ruiz</b><br>
+                <b>Javier López Muñoz</b>
+            </p>
+        </div>
+   </div>
+</body>
+</html>
